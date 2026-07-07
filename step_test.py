@@ -1,5 +1,4 @@
 import time
-from Inverse_Kinematics import get_leg_angles
 from move_servo_xyz import move_servo_xyz
 from cycloid_formula import calculate_cycloid
 
