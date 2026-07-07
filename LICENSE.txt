@@ -1,0 +1,49 @@
+PROJECT LICENSE: 18DOF Hexapod
+
+Copyright (c) 2026 Franklin Warren
+
+
+
+PART 1: HARDWARE DESIGNS, 3D FILES, AND BLUEPRINTS
+
+All physical designs, CAD models, 3D printing (.STL/.STEP) files,
+
+PCB schematics, and structural documentation in this repository
+
+are licensed under the Creative Commons Attribution-NonCommercial-ShareAlike
+
+4.0 International (CC BY-NC-SA 4.0) License.
+
+
+
+To view a copy of this license, visit:
+
+http://creativecommons.org
+
+
+
+Hobbyists may freely build, remix, and share the physical
+
+robot, however, no commercial use (use for profit) is allowed. 
+
+
+
+PART 2: FIRMWARE, SOURCE CODE, AND SOFTWARE
+
+All software source code, firmware scripts, configuration files, and
+
+programming logic in this repository are licensed under the PolyForm
+
+Noncommercial License 1.0.0.
+
+
+
+By using or distributing this software, you accept this license. The licensor
+
+grants you a copyright license to use, copy, modify, and distribute this
+
+software. You may not exercise any of the rights granted to you by this
+
+license for commercial purposes. This software is provided "as is", without
+
+warranty of any kind.
