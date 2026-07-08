@@ -1,5 +1,5 @@
 import math
-from law_of_cosines import law_of_cosines_SAS, law_of_cosines_SSS 
+from formulas.law_of_cosines import law_of_cosines_SAS, law_of_cosines_SSS 
 
 #see project journal for diagrams and derivations
 #all numbers in mm, angles in radians, but converted to degrees at the end for servo movement. 
@@ -10,12 +10,14 @@ femur= 85
 tibia = 165
 
 def get_leg_angles (x, y, z):
+    print("get leg angles called at:", x, y, z)
 
     #Step 1: COXA ANGLE 
     theta_c = math.atan2 (y, x)
     theta_c_degrees = math.degrees(theta_c)
 
     if not -70<= theta_c_degrees <= 70: # will break joint
+        print("FAILED. Coxa tried to go to ", theta_c_degrees)
         return None
     
     # R and D from derivation
@@ -38,6 +40,7 @@ def get_leg_angles (x, y, z):
     theta_f_degrees = (math.degrees(theta_f))
 
     if not -90<= theta_f_degrees <=90: 
+        print("FAILED. Femur tried to go to: ", theta_f_degrees)
         return None
 
     #Step 3: TIBIA ANGLE
@@ -48,7 +51,8 @@ def get_leg_angles (x, y, z):
     theta_t_degrees = -abs(math.degrees(theta_t)) #makes knee bend properly
 
 
-    if not -125 <= theta_t_degrees <=45: #mounted tibia at offset, so when the 180 degree servo is at 135 degrees leg is horizontal
+    if not -125 <= theta_t_degrees <=45: 
+        print("FAILED. Tibia tried to go to ", theta_t_degrees)
         return None
     
     return theta_c_degrees, theta_f_degrees, theta_t_degrees 

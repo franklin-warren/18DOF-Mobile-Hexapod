@@ -5,10 +5,10 @@ from formulas.cycloid_formula import calculate_cycloid
 time.sleep_ms(10) #allows servos to get to postion
 step_time = 0.75 #T
 half_step_time = step_time/2 #splits entire function into rise and fall
-step_static_x_pos = 170
+step_static_x_pos = 150
 
 #resolution: MATCH TO SERVO CONFIG FREQ PARAMETER!!! Higher resolution increases compute time
-resolution = int(half_step_time * 200) #number is freq
+resolution = int(half_step_time * 50) #number is <=freq
 delay_time = half_step_time/resolution
 
 

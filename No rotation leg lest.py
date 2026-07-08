@@ -12,12 +12,12 @@ from formulas.rotation_matrix import rotate_point
 from hexapod_servo_config import *
 from move_leg import move_leg
 
-step_time = 0.75 #T
+step_time = 0.5 #T
 half_step_time = step_time/2 #splits entire function into rise and fall
 step_static_x_pos = 160
 
 #resolution: MATCH TO SERVO CONFIG FREQ PARAMETER!!! Higher resolution increases compute time
-resolution = int(half_step_time * 20) #number is <=freq
+resolution = int(half_step_time * 100) #number is <=freq
 delay_time = half_step_time/resolution
 delay_time_ns = int(delay_time * 1_000_000_000) 
 
@@ -28,8 +28,8 @@ H_rise = 30 #how big ar steps
 s_final_rise = step_z_naught_rise + H_rise
 step_z_naught_fall = s_final_rise
 
-step_y_naught = -70
-step_y_final  = 70
+step_y_naught = -75
+step_y_final  = 75
 y_middle_step = (step_y_naught + step_y_final)/2
 
 z_pos_rise = calculate_cycloid(step_z_naught_rise, s_final_rise, half_step_time, resolution)
@@ -40,66 +40,35 @@ y_pos_rise = calculate_cycloid(step_y_naught, y_middle_step, half_step_time, res
 y_pos_fall = calculate_cycloid(y_middle_step, step_y_final, half_step_time, resolution)
 y_pos_stance = calculate_cycloid(step_y_final, step_y_naught, 2 * half_step_time, 2 * resolution)
 
-#region compute joint angles and save into list
+#region get joint angles for each leg
 print("Starting IK")
-RB_rot = -30
-rb_angles_rise = []
-print("Rotated Values")
-for i in range (len(y_pos_rise)):
-    delta_x, delta_y = rotate_point(step_static_x_pos, y_pos_rise[i], RB_rot)
-    #print("(",delta_x,",", delta_y,")")
-    x_prime = delta_x
-    y_prime = delta_y
-    angles = get_leg_angles(x_prime, y_prime, z_pos_rise[i])
-    print(angles)
-    rb_angles_rise.append(angles)
-
-rb_angles_fall = []
-for i in range (len(y_pos_fall)):
-    delta_x, delta_y = rotate_point(step_static_x_pos, y_pos_fall[i], RB_rot)
-    #print(delta_x, delta_y)
-    x_prime = delta_x
-    y_prime = delta_y
-    angles = get_leg_angles(x_prime, y_prime, z_pos_fall[i])
-    rb_angles_fall.append(angles)
-
-rb_angles_stance = []
-for i in range (len(y_pos_stance)):
-    delta_x, delta_y = rotate_point(step_static_x_pos, y_pos_stance[i], RB_rot)
-    #print(delta_x, delta_y)
-    x_prime = delta_x
-    y_prime = delta_y
-    angles = get_leg_angles(x_prime, y_prime, step_z_final)
-    rb_angles_stance.append(angles)
-
 print("Nominal values, non rotated")
-rm_angles_rise = []
+angles_rise = []
 for i in range (len(y_pos_rise)):
     #print("(",step_static_x_pos,",", y_pos_rise[i],")")
     angles = get_leg_angles(step_static_x_pos, y_pos_rise[i], z_pos_rise[i])
-    rm_angles_rise.append(angles)
+    angles_rise.append(angles)
     print(angles)
 
-rm_angles_fall = []
+angles_fall = []
 for i in range (len(y_pos_fall)):
     angles = get_leg_angles(step_static_x_pos, y_pos_fall[i], z_pos_fall[i])
-    rm_angles_fall.append(angles)
+    angles_fall.append(angles)
 
-rm_angles_stance = []
+angles_stance = []
 for i in range (len(y_pos_stance)):
     angles = get_leg_angles(step_static_x_pos, y_pos_stance[i], step_z_final)
-    rm_angles_stance.append(angles)
+    angles_stance.append(angles)
 #endregion
 
-rm_swing_angles = rm_angles_rise + rm_angles_fall[1:]
-rb_swing_angles = rb_angles_rise + rb_angles_fall[1:]
+swing_angles = angles_rise + angles_fall[1:]
 substeps_per_phase = 2*resolution
 
 tripod_A = [ #will be RF LM and RB
-    ('RB', rb_swing_angles, rb_angles_stance),
+    ('RB', swing_angles, angles_stance),
 ]
 tripod_B = [ #will be LF RM and LB
-    ('RM', rm_swing_angles, rm_angles_stance)
+    ('RM', swing_angles, angles_stance)
 ]
 
 current_phase = 'A_swing_B_stance'
@@ -155,12 +124,4 @@ while True:
             if substeps_taken >= substeps_per_phase:
                 substeps_taken = 0
                 current_phase = 'A_swing_B_stance'
-
-    
-
-
-
-
-
-
 

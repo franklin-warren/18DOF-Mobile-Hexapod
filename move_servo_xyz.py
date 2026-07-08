@@ -1,5 +1,5 @@
 from formulas.Inverse_Kinematics import get_leg_angles
-from hexapod_servo_config import move_servo, RF_coxa, RF_femur, RF_tibia
+from hexapod_servo_config import *
 
 
 def move_servo_xyz(x, y, z):
@@ -16,18 +16,19 @@ def move_servo_xyz(x, y, z):
         print("Position: ", "(", x,",", y,",", z, ")")
 
         # print("Coxa angle: ", (coxa))
-        move_servo(RF_coxa, move_coxa)
+        move_servo(RB_coxa, move_coxa)
         # print("Coxa moved to: ", move_coxa)
 
         # print("Femur angle: ", (femur))
-        move_servo(RF_femur, move_femur)
+        move_servo(RB_femur, move_femur)
         # print("Femur moved to: ", move_femur)
 
         print("Tibia angle: ", (tibia))
-        move_servo(RF_tibia, move_tibia)
+        move_servo(RB_tibia, move_tibia)
         # print("Tibia moved to: ", move_tibia)
     else:
         print("Position: ", "(", x,",", y,",", z, ")")
         print("Out of Reach")
 
-move_servo_xyz(300, -0, -0)
+
+move_servo_xyz(300, 0, 0)

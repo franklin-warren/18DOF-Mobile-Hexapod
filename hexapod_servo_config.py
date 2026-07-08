@@ -12,17 +12,17 @@ right_board_270 = servo.Servos(i2c, address=0x40, freq=200, min_us=500, max_us=2
 # left_board_270 = servo.Servos(i2c, address=0x41, freq=200, min_us=500, max_us=2500, degrees=270)
 
 #leg setup. R= right, L= left, F= front, M= middle, B=back
-RF_coxa = (right_board_270, 0)
-RF_femur = (right_board_270, 1)
-RF_tibia = (right_board_270, 2)
+RF_coxa = (right_board_270, 6)
+RF_femur = (right_board_270, 7)
+RF_tibia = (right_board_270, 8)
 
 RM_coxa = (right_board_270, 3)
 RM_femur = (right_board_270, 4)
 RM_tibia = (right_board_270, 5)
 
-RB_coxa = (right_board_270, 6)
-RB_femur = (right_board_270, 7)
-RB_tibia = (right_board_270, 8)
+RB_coxa = (right_board_270, 0)
+RB_femur = (right_board_270, 1)
+RB_tibia = (right_board_270, 2)
 
 # LF_coxa = (left_board_270, 0)
 # LF_femur = (left_board_270, 1)
@@ -42,7 +42,7 @@ def move_servo(joint, degrees):
     board.position(channel, degrees=degrees)
 
 right_servos = {
-    'RF': {"coxa": (right_board_270, 0), "femur": (right_board_270, 1), "tibia": (right_board_270, 2)}, 
+    'RF': {"coxa": (right_board_270, 6), "femur": (right_board_270, 7), "tibia": (right_board_270, 8)}, 
     'RM': {"coxa": (right_board_270, 3), "femur": (right_board_270, 4), "tibia": (right_board_270, 5)}, 
-    'RB': {"coxa": (right_board_270, 6), "femur": (right_board_270, 7), "tibia": (right_board_270, 8)}
+    'RB': {"coxa": (right_board_270, 0), "femur": (right_board_270, 1), "tibia": (right_board_270, 2)}
 }

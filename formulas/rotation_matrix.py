@@ -3,15 +3,10 @@
 
 import math
 
-def rotate_x(x, y, angle_deg):
-    angle_rad = math.radians(angle_deg)
+def rotate_point(x, y, rotation_deg):
+    angle_rad = math.radians(rotation_deg)
+
     x_prime = x * math.cos(angle_rad) - y * math.sin(angle_rad)
-    
-    return(x_prime)
+    y_prime = x * math.sin(angle_rad) + y * math.cos(angle_rad)
 
-def rotate_y(x, y, angle_deg):
-    angle_rad = math.radians(angle_deg)
-    y_prime = y * math.sin(angle_rad) + x * math.cos(angle_rad)
-
-    return(y_prime)
-
+    return x_prime, y_prime
