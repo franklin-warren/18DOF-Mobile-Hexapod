@@ -30,5 +30,3 @@ def move_servo_xyz(x, y, z):
         print("Position: ", "(", x,",", y,",", z, ")")
         print("Out of Reach")
 
-
-move_servo_xyz(300, 0, 0)

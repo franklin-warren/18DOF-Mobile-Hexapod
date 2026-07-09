@@ -6,7 +6,7 @@ import time
 i2c = I2C(0, sda=Pin(4), scl=Pin(5), freq=400000)
 
 #right legs
-right_board_270 = servo.Servos(i2c, address=0x40, freq=200, min_us=500, max_us=2500, degrees=270)
+right_board_270 = servo.Servos(i2c, address=0x40, freq=50, min_us=500, max_us=2500, degrees=270)
 
 # #left legs
 # left_board_270 = servo.Servos(i2c, address=0x41, freq=200, min_us=500, max_us=2500, degrees=270)

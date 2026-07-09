@@ -12,7 +12,7 @@ from formulas.rotation_matrix import rotate_point
 from hexapod_servo_config import *
 from move_leg import move_leg
 
-step_time = 0.75 #T
+step_time = 0.5 #T
 half_step_time = step_time/2 #splits entire function into rise and fall
 step_static_x_pos = 160
 
@@ -28,8 +28,8 @@ H_rise = 30 #how big ar steps
 s_final_rise = step_z_naught_rise + H_rise
 step_z_naught_fall = s_final_rise
 
-step_y_naught = -150
-step_y_final  = 150
+step_y_naught = -75
+step_y_final  = 75
 y_middle_step = (step_y_naught + step_y_final)/2
 
 z_pos_rise = calculate_cycloid(step_z_naught_rise, s_final_rise, half_step_time, resolution)
@@ -137,7 +137,7 @@ while True:
                     print("leg ", leg, "out of reach! skipping substep ", substeps_taken)
     
             for leg, swing, stance in tripod_B:
-                target_angles = swing[substeps_taken]
+                target_angles = stance[substeps_taken]
                 if target_angles is not None:
                     move_leg(leg, *target_angles)
                 else: 
