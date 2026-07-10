@@ -7,3 +7,5 @@ def move_leg(leg_prefix, coxa_deg, femur_deg, tibia_deg):
     move_servo(leg_joints['femur'], 135-femur_deg)
     move_servo(leg_joints['tibia'], tibia_deg+135)
 
+move_leg("RB", 30, 0, 0)
+move_leg("RM", 0, 0, 0)

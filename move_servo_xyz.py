@@ -23,10 +23,12 @@ def move_servo_xyz(x, y, z):
         move_servo(RB_femur, move_femur)
         # print("Femur moved to: ", move_femur)
 
-        print("Tibia angle: ", (tibia))
+        # print("Tibia angle: ", (tibia))
         move_servo(RB_tibia, move_tibia)
         # print("Tibia moved to: ", move_tibia)
     else:
         print("Position: ", "(", x,",", y,",", z, ")")
         print("Out of Reach")
 
+move_servo(RB_coxa, 131)
+time.sleep(0.15)

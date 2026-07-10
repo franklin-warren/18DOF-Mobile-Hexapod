@@ -6,7 +6,7 @@ import time
 i2c = I2C(0, sda=Pin(4), scl=Pin(5), freq=400000)
 
 #right legs
-right_board_270 = servo.Servos(i2c, address=0x40, freq=50, min_us=500, max_us=2500, degrees=270)
+right_board_270 = servo.Servos(i2c, address=0x40, freq=200, min_us=500, max_us=2500, degrees=270)
 
 # #left legs
 # left_board_270 = servo.Servos(i2c, address=0x41, freq=200, min_us=500, max_us=2500, degrees=270)
@@ -46,3 +46,15 @@ right_servos = {
     'RM': {"coxa": (right_board_270, 3), "femur": (right_board_270, 4), "tibia": (right_board_270, 5)}, 
     'RB': {"coxa": (right_board_270, 0), "femur": (right_board_270, 1), "tibia": (right_board_270, 2)}
 }
+
+move_servo(RB_coxa, 135)
+time.sleep(0.15)
+move_servo(RB_femur, 135)
+time.sleep(0.15)
+move_servo(RB_tibia, 135)
+time.sleep(0.15)
+move_servo(RB_coxa, 135)
+time.sleep(0.15)
+move_servo(RB_femur, 135)
+time.sleep(0.15)
+move_servo(RB_tibia, 135)

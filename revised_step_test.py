@@ -3,21 +3,22 @@ from formulas.rotation_matrix import rotate_point
 from formulas.cycloid_formula import calculate_cycloid
 from formulas.Inverse_Kinematics import get_leg_angles
 from move_leg import move_leg
+from hexapod_servo_config import *
 
 #region SETUP
-step_time = 0.75 #T
+step_time = 2.0 #T
 half_step_time = step_time/2 #splits entire function into rise and fall
-step_static_x_pos = 150
+step_static_x_pos = 160
 
 #resolution: MATCH TO SERVO CONFIG FREQ PARAMETER!!! Higher resolution increases compute time
-resolution = int(half_step_time * 50) #number is <=freq
+resolution = 50#int(half_step_time * 200) #number is <=freq
 delay_time = half_step_time/resolution
 delay_time_ns = int(delay_time * 1_000_000_000) 
 
 
 step_z_naught_rise = -125
 step_z_final = -125
-H_rise = 30 #how big ar steps
+H_rise = 40 #how big ar steps
 s_final_rise = step_z_naught_rise + H_rise
 step_z_naught_fall = s_final_rise
 
@@ -26,7 +27,7 @@ step_y_final  = 75
 y_middle_step = (step_y_naught + step_y_final)/2
 
 RB_rot = -30
-RB_comp = -RB_rot
+RB_comp = 150
 #endregion
 
 #region CYCLOIDS
@@ -41,10 +42,12 @@ z_pos_swing = z_pos_rise + z_pos_fall[1:]
 y_pos_swing = y_pos_rise + y_pos_fall[1:]
 y_pos_stance = y_pos_stance
 
-# print(len(z_pos_swing)) #all should equal the same number
-# print(len(y_pos_stance))
-# print(len(y_pos_swing))
-
+print(len(z_pos_swing)) #all should equal the same number
+print(len(y_pos_stance))
+print(len(y_pos_swing))
+print("y value checker")
+for i in range(len(y_pos_swing)):
+    print("swing: ", y_pos_swing[i], "stance: ", y_pos_stance[i])
 #endregion
 
 #region INVERSE KINEMATICS
@@ -53,7 +56,8 @@ print("starting inverse kinematics")
 #right middle: no rotation
 RM_swing_angles = []
 RM_stance_angles = []
-for i in range(len(z_pos_swing)):
+for i in range(len(y_pos_swing)):
+    print("(",step_static_x_pos,",", y_pos_swing[i],")")
     angles = get_leg_angles(step_static_x_pos, y_pos_swing[i], z_pos_swing[i])
     if angles is not None:
         RM_swing_angles.append(angles)
@@ -75,17 +79,18 @@ RB_rotated_x_stance = []
 RB_rotated_y_stance = []
 RB_swing_angles = []
 RB_stance_angles = []
-
+print("RB")
 local_delta_x = 0 #unrotated, x should change by this much over the course of the step. If cycloid list for x, local_delta_x = list[i]
 y_offset = 0
 for i in range(len(y_pos_swing)):
     target_x, target_y = rotate_point(local_delta_x, y_pos_swing[i], RB_comp)
-    RB_rotated_x_swing.append(target_x + step_static_x_pos)
+    RB_rotated_x_swing.append(target_x+step_static_x_pos)
     RB_rotated_y_swing.append (target_y + y_offset)
+    print("(",target_x+step_static_x_pos,",", target_y+y_offset,")")
 
 for i in range (len(y_pos_stance)):
     target_x, target_y = rotate_point(local_delta_x, y_pos_stance[i], RB_comp)
-    RB_rotated_x_stance.append(target_x + step_static_x_pos)
+    RB_rotated_x_stance.append(target_x+step_static_x_pos)
     RB_rotated_y_stance.append (target_y + y_offset)
 
 for i in range (len(RB_rotated_x_swing)):
@@ -108,6 +113,7 @@ for i in range (len(RB_rotated_x_stance)):
 
 #region MAIN LOOP
 
+print("Reached main loop.")
 substeps_per_phase = len(y_pos_stance)
 current_phase = 'A_swing_B_stance'
 substeps_taken = 0
@@ -120,7 +126,7 @@ tripod_A = [ #will be RF LM and RB
 tripod_B = [ #will be LF RM and LB
     ('RM', RM_swing_angles, RM_stance_angles)
 ]
-
+print("RM motion checker xyz")
 while True:
     if current_phase == 'A_swing_B_stance':
 
@@ -130,14 +136,21 @@ while True:
             for leg, swing, stance in tripod_A:
                 target_angles = swing[substeps_taken]
                 if target_angles is not None:
-                    move_leg(leg, *target_angles)
+                    coxa, femur, tibia = target_angles
+                    move_servo(RB_coxa, coxa+131)
+                    move_servo(RB_femur, 135-femur)
+                    move_servo(RB_tibia, tibia+135)
                 else: 
                     print("leg ", leg, "out of reach! skipping substep ", substeps_taken)
     
             for leg, swing, stance in tripod_B:
                 target_angles = stance[substeps_taken]
+                print("Stance coxa angle:", target_angles[0])
                 if target_angles is not None:
-                    move_leg(leg, *target_angles)
+                    coxa, femur, tibia = target_angles
+                    move_servo(RM_coxa, coxa+135)
+                    move_servo(RM_femur, 135-femur)
+                    move_servo(RM_tibia, tibia+135)
                 else: 
                     print("leg ", leg, "out of reach! skipping substep ", substeps_taken)
             last_time = current_time
@@ -154,14 +167,21 @@ while True:
             for leg, swing, stance in tripod_A:
                 target_angles = stance[substeps_taken]
                 if target_angles is not None:
-                    move_leg(leg, *target_angles)
+                    coxa, femur, tibia = target_angles
+                    move_servo(RB_coxa, coxa+131)
+                    move_servo(RB_femur, 135-femur)
+                    move_servo(RB_tibia, tibia+135)
                 else:
                     print("leg ", leg, "out of reach! skipping substep ", substeps_taken)
             
             for leg, swing, stance in tripod_B:
                 target_angles = swing[substeps_taken]
+                print("Swing coxa angle :", target_angles[0])
                 if target_angles is not None:
-                    move_leg(leg, *target_angles)
+                    coxa, femur, tibia = target_angles
+                    move_servo(RM_coxa, coxa+135)
+                    move_servo(RM_femur, 135-femur)
+                    move_servo(RM_tibia, tibia+135)
                 else:
                     print("leg ", leg, "out of reach! skipping substep ", substeps_taken)
 
