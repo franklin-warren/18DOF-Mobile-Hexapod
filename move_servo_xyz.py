@@ -30,5 +30,6 @@ def move_servo_xyz(x, y, z):
         print("Position: ", "(", x,",", y,",", z, ")")
         print("Out of Reach")
 
-move_servo(RB_coxa, 131)
+move_servo(RB_coxa, 135)
+move_servo(RM_coxa, 135)
 time.sleep(0.15)

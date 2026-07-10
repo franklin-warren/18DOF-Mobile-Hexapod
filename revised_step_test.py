@@ -6,7 +6,7 @@ from move_leg import move_leg
 from hexapod_servo_config import *
 
 #region SETUP
-step_time = 2.0 #T
+step_time = 0.25 #T
 half_step_time = step_time/2 #splits entire function into rise and fall
 step_static_x_pos = 160
 
@@ -18,7 +18,7 @@ delay_time_ns = int(delay_time * 1_000_000_000)
 
 step_z_naught_rise = -125
 step_z_final = -125
-H_rise = 40 #how big ar steps
+H_rise = 40 #how tall steps are 
 s_final_rise = step_z_naught_rise + H_rise
 step_z_naught_fall = s_final_rise
 
@@ -26,9 +26,8 @@ step_y_naught = -75
 step_y_final  = 75
 y_middle_step = (step_y_naught + step_y_final)/2
 
-RB_rot = -30
-RB_comp = 150
-#endregion
+RB_rot = -45
+RB_comp = 135
 
 #region CYCLOIDS
 z_pos_rise = calculate_cycloid(step_z_naught_rise, s_final_rise, half_step_time, resolution)
@@ -57,7 +56,6 @@ print("starting inverse kinematics")
 RM_swing_angles = []
 RM_stance_angles = []
 for i in range(len(y_pos_swing)):
-    print("(",step_static_x_pos,",", y_pos_swing[i],")")
     angles = get_leg_angles(step_static_x_pos, y_pos_swing[i], z_pos_swing[i])
     if angles is not None:
         RM_swing_angles.append(angles)
@@ -81,17 +79,15 @@ RB_swing_angles = []
 RB_stance_angles = []
 print("RB")
 local_delta_x = 0 #unrotated, x should change by this much over the course of the step. If cycloid list for x, local_delta_x = list[i]
-y_offset = 0
 for i in range(len(y_pos_swing)):
     target_x, target_y = rotate_point(local_delta_x, y_pos_swing[i], RB_comp)
     RB_rotated_x_swing.append(target_x+step_static_x_pos)
-    RB_rotated_y_swing.append (target_y + y_offset)
-    print("(",target_x+step_static_x_pos,",", target_y+y_offset,")")
+    RB_rotated_y_swing.append (target_y)
 
 for i in range (len(y_pos_stance)):
     target_x, target_y = rotate_point(local_delta_x, y_pos_stance[i], RB_comp)
     RB_rotated_x_stance.append(target_x+step_static_x_pos)
-    RB_rotated_y_stance.append (target_y + y_offset)
+    RB_rotated_y_stance.append (target_y)
 
 for i in range (len(RB_rotated_x_swing)):
     angles = get_leg_angles(RB_rotated_x_swing[i], RB_rotated_y_swing[i], z_pos_swing[i])
@@ -145,7 +141,6 @@ while True:
     
             for leg, swing, stance in tripod_B:
                 target_angles = stance[substeps_taken]
-                print("Stance coxa angle:", target_angles[0])
                 if target_angles is not None:
                     coxa, femur, tibia = target_angles
                     move_servo(RM_coxa, coxa+135)
@@ -176,7 +171,6 @@ while True:
             
             for leg, swing, stance in tripod_B:
                 target_angles = swing[substeps_taken]
-                print("Swing coxa angle :", target_angles[0])
                 if target_angles is not None:
                     coxa, femur, tibia = target_angles
                     move_servo(RM_coxa, coxa+135)
