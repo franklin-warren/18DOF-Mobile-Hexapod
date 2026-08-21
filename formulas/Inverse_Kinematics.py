@@ -56,4 +56,3 @@ def get_leg_angles (x, y, z):
         return None
     
     return theta_c_degrees, theta_f_degrees, theta_t_degrees 
-    
