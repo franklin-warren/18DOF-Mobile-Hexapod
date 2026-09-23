@@ -19,12 +19,14 @@ Currently in the main programming stage of the design. <br>
 <br>
 **Media:**
 <br>
-**Walk through/work in progress demo: <br>**
+**Walk through/work in progress demo:** <br>
 
 
 
 <br>
-**Video of two legs walking:<br>**
+**Video of two legs walking:**<br>
+
+
 https://github.com/user-attachments/assets/c0b8d58c-5718-43e7-b491-6766b3c93bf8
 <br>
 CAD and renders:<br>
