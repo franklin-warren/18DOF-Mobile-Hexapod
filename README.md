@@ -85,6 +85,10 @@ Some changes to the electronics layout have been made, although the core compone
 	
 <br>
 <br>
+Physical Stuff files (.STEP for assembly, zip folders for boards):
+<br>
+https://drive.google.com/drive/folders/1-5ccQgtat7KWImv0UO3M1iz52NkRRpyl?usp=drive_link
+<br>
 **Print settings, assembly tips, etc:**
 <br>
 	Print out of PETG at 4 wall loops and 30% gyroid infill. If the legs are too heavy, there will be too much torque needed, and the servos will be strained. 
