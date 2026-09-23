@@ -38,6 +38,7 @@ CAD and renders:<br>
 
 <br>
 Build and samples from my engineering notebook:
+<br>
 <img width="635" height="670" alt="image" src="https://github.com/user-attachments/assets/a1ff342d-03ef-4997-9e3d-7e4f1d81ffa9" />
 <img width="620" height="787" alt="image" src="https://github.com/user-attachments/assets/72631028-9518-440f-96d9-83da0f77e5c5" />
 <img width="583" height="729" alt="image" src="https://github.com/user-attachments/assets/e34c4752-0645-4e41-b633-1219c8198fe8" />
@@ -53,6 +54,7 @@ Note that with some testing and condensing, I did manage to fit the hexapod onto
 <br>
 <img width="583" height="708" alt="image" src="https://github.com/user-attachments/assets/f6e8e8b5-9cb0-4b7c-8123-1a165e89635d" />
 <img width="545" height="708" alt="image" src="https://github.com/user-attachments/assets/b2a69725-3682-4039-b095-e1ca562f1264" />
+<br>
 Some changes to the electronics layout have been made, although the core components have stayed the same. 
 
 <br>
