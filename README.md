@@ -5,7 +5,8 @@ Currently under construction, this represents progress at the end of Stardance. 
 Inserted are images/videos of the construction process, including photos of assembly, videos of legs moving, as well as CAD screenshots. <br>
 Currently in the main programming stage of the design. <br>
 <br>
-**Key points:<br>**
+**Key points:**
+	<br>
 	Derived and programmed a custom inverse kinematics engine in both leg-centric and bot-centric design <br>
 	Derived and implemented a cycloidal step path to reduce power draw and servo strain <br>
 	Designed a 3 layer PCB stackup to handle high-amp servo draw and sensitive sensor data simultaneously <br>
