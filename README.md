@@ -1,11 +1,11 @@
-18DOF HEXAPOD ROBOT: It's a spider bot with a suite of sensors. Manual joystick control with plans to implement autonomous walking.
+**18DOF HEXAPOD ROBOT: It's a spider bot with a suite of sensors. Manual joystick control with plans to implement autonomous walking.**
 <img width="1259" height="941" alt="image" src="https://github.com/user-attachments/assets/576bdf7d-288b-41cf-b133-5b3795a55f39" />
 
 Currently under construction, this represents progress at the end of Stardance. All code is a work in progress. <br>
 Inserted are images/videos of the construction process, including photos of assembly, videos of legs moving, as well as CAD screenshots. <br>
 Currently in the main programming stage of the design. <br>
 <br>
-Key points:<br>
+**Key points:<br>**
 	Derived and programmed a custom inverse kinematics engine in both leg-centric and bot-centric design <br>
 	Derived and implemented a cycloidal step path to reduce power draw and servo strain <br>
 	Designed a 3 layer PCB stackup to handle high-amp servo draw and sensitive sensor data simultaneously <br>
@@ -16,14 +16,14 @@ Key points:<br>
 
 
 <br>
-Media:
+**Media:**
 <br>
-Walk through/work in progress demo: <br>
+**Walk through/work in progress demo: <br>**
 
 
 
 <br>
-Video of two legs walking:<br>
+**Video of two legs walking:<br>**
 https://github.com/user-attachments/assets/c0b8d58c-5718-43e7-b491-6766b3c93bf8
 <br>
 CAD and renders:<br>
@@ -58,8 +58,8 @@ Note that with some testing and condensing, I did manage to fit the hexapod onto
 Some changes to the electronics layout have been made, although the core components have stayed the same. 
 
 <br>
-What works:
 <br>
+**What works:**
 <br>
 	Full electromechanical assembly
 	One side successfully responds to servo mode commands. 
@@ -69,8 +69,7 @@ What works:
 	Cycloidal algorithm works near-flawless, no complaints. It reduces servo power by over 500mA (during startup, as opposed to a linear/instant acceleration curve).
 <br>
 <br>
-What is still to be done:
-<br>
+**What is still to be done:**
 <br>
 	The other side PCA has to be swapped (scheduled for prior to October 1st)
 	Raspberry Pi <-> ESP link must be validated. 
@@ -79,7 +78,7 @@ What is still to be done:
 
 <br>
 <br>
-Stretch Goals:
+**Stretch Goals:**
 <br>
 	LiDAR, either simple point cloud or full SLAM
 	Autonomous walking/navigation.
@@ -87,7 +86,7 @@ Stretch Goals:
 	
 <br>
 <br>
-Print settings, assembly tips, etc:
+**Print settings, assembly tips, etc:**
 <br>
 	Print out of PETG at 4 wall loops and 30% gyroid infill. If the legs are too heavy, there will be too much torque needed, and the servos will be strained. 
 	Assembly can follow the CAD for the most part. Ensure all heat sets are as close to straight as possible. 
