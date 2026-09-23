@@ -43,12 +43,14 @@ Build and samples from my engineering notebook:
 <img width="583" height="729" alt="image" src="https://github.com/user-attachments/assets/e34c4752-0645-4e41-b633-1219c8198fe8" />
 <img width="550" height="722" alt="image" src="https://github.com/user-attachments/assets/d6bf6107-2666-4615-898f-47b7f0200dc6" />
 <img width="528" height="652" alt="image" src="https://github.com/user-attachments/assets/c00294bf-c91a-4248-a500-df394b4a1f45" />
+<br>
 I am currently taking a linear algebra course, so I will revisit these transformation after midterms. 
-
+<br>
 <img width="570" height="774" alt="image" src="https://github.com/user-attachments/assets/b7fd8fb0-a92d-4a8e-a387-27a2d6b3445a" />
 <img width="575" height="735" alt="image" src="https://github.com/user-attachments/assets/654039ca-7fdb-4eaa-aeb9-3e2d185962c5" />
+<br>
 Note that with some testing and condensing, I did manage to fit the hexapod onto a slimmer profile, small enough for each frame part to be one piece, printed on a standard build size (25x25cm, ish). 
-
+<br>
 <img width="583" height="708" alt="image" src="https://github.com/user-attachments/assets/f6e8e8b5-9cb0-4b7c-8123-1a165e89635d" />
 <img width="545" height="708" alt="image" src="https://github.com/user-attachments/assets/b2a69725-3682-4039-b095-e1ca562f1264" />
 Some changes to the electronics layout have been made, although the core components have stayed the same. 
@@ -56,15 +58,17 @@ Some changes to the electronics layout have been made, although the core compone
 <br>
 What works:
 <br>
+<br>
 	Full electromechanical assembly
 	One side successfully responds to servo mode commands. 
 	Noise has been reduced on IIC lines, they now work. 
 	Power system works with no shorts.
 	Gait math per leg has been derived, robot-centric has been derived (although refinements are in progress). 
 	Cycloidal algorithm works near-flawless, no complaints. It reduces servo power by over 500mA (during startup, as opposed to a linear/instant acceleration curve).
-
+<br>
 <br>
 What is still to be done:
+<br>
 <br>
 	The other side PCA has to be swapped (scheduled for prior to October 1st)
 	Raspberry Pi <-> ESP link must be validated. 
@@ -72,12 +76,14 @@ What is still to be done:
 	Making the robot walk to a demo-worthy standard
 
 <br>
+<br>
 Stretch Goals:
 <br>
 	LiDAR, either simple point cloud or full SLAM
 	Autonomous walking/navigation.
 	
 	
+<br>
 <br>
 Print settings, assembly tips, etc:
 <br>
