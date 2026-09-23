@@ -20,13 +20,9 @@ Currently in the main programming stage of the design. <br>
 **Media:**
 <br>
 **Walk through/work in progress demo:** <br>
-
-
-
+https://drive.google.com/file/d/1R8LIc6dlmES_6KmEAEqcxywUw9GedAyd/view?usp=drive_link
 <br>
 **Video of two legs walking:**<br>
-
-
 https://github.com/user-attachments/assets/c0b8d58c-5718-43e7-b491-6766b3c93bf8
 <br>
 CAD and renders:<br>
